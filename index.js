@@ -18,17 +18,26 @@ if (argv.filter && fs.existsSync(argv.filter)) {
 var filter = ff(argv.filter);
 
 stream.on('data', function (data) {
-    var f = {
-        'type': 'Feature',
-        'geometry': data.geojson(),
-        'properties': data.tags()
-    };
-
-    if (filter(f)) {
-        console.log(JSON.stringify(f));
+    var f;
+    try {
+        f = getFeature(data);
+        if (f && filter(f)) {
+            console.log(JSON.stringify(f));
+        }
+    } catch (e) {
+        return;
     }
+
 });
 
 stream.on('end', function() {
     console.log('done');
 });
+
+function getFeature(d) {
+    return {
+        'type': 'Feature',
+        'geometry': d.geojson(),
+        'properties': d.tags()
+    };
+}
