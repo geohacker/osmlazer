@@ -3,9 +3,23 @@ osmium based OpenStreetMap data filter. Input is an OSM PBF, output is a stream 
 
 ## Setup
 
-1. git https://github.com/geohacker/osmlazer.git
-2. [Install osmium dependencies](https://github.com/osmcode/node-osmium#depends)
-3. `npm install`
+### Dependencies
+#### Linux
+
+```
+apt-get install -y build-essential zlib1g-dev unzip python-dev \
+  git libtool g++ autotools-dev automake cmake make xutils-dev realpath ragel
+```
+
+#### osx
+
+```
+brew install autoconf automake libtool makedepend
+```
+
+* [Install osmium dependencies](https://github.com/osmcode/node-osmium#depends)
+* git https://github.com/geohacker/osmlazer.git
+* `npm install`
 
 ## Usage
 
