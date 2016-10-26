@@ -1,0 +1,16 @@
+{
+  "name": "osmium-extractor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sajjad Anwar",
+  "license": "ISC",
+  "dependencies": {
+    "feature-filter": "^2.2.0",
+    "minimist": "^1.2.0",
+    "osmium": "^0.5.3"
+  }
+}
