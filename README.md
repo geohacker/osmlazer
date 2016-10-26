@@ -1,5 +1,5 @@
 # osmlazer
-osmium based OpenStreetMap data filter
+osmium based OpenStreetMap data filter. Input is an OSM PBF, output is a stream of GeoJSON features.
 
 ## Setup
 
