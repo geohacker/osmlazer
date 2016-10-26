@@ -18,7 +18,7 @@ brew install autoconf automake libtool makedepend
 ```
 
 * [Install osmium dependencies](https://github.com/osmcode/node-osmium#depends)
-* git https://github.com/geohacker/osmlazer.git
+* git clone https://github.com/geohacker/osmlazer.git
 * `npm install`
 
 ## Usage
