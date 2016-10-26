@@ -22,7 +22,11 @@ stream.on('data', function (data) {
     try {
         f = getFeature(data);
         if (f && filter(f)) {
-            console.log(JSON.stringify(f));
+            var fc = {
+                'type': 'FeatureCollection',
+                'features': [f]
+            };
+            console.log(JSON.stringify(fc));
         }
     } catch (e) {
         return;
@@ -31,13 +35,16 @@ stream.on('data', function (data) {
 });
 
 stream.on('end', function() {
-    console.log('done');
+    process.stderr.write('done');
 });
 
 function getFeature(d) {
-    return {
+    var feature = {
         'type': 'Feature',
         'geometry': d.geojson(),
         'properties': d.tags()
     };
+
+    return feature;
+
 }
