@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "feature-filter": "^2.2.0",
+    "mapbox-data-team": "^1.1.4",
     "minimist": "^1.2.0",
     "osmium": "^0.5.3"
   }
