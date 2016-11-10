@@ -13,34 +13,23 @@ var mappers = ['Rub21','ediyes','Luis36995','RichRico','dannykath','andygol','ru
 'lxbarth','shvrm', 'Aaron Lidman','geohacker','pratikyadav','jinalfoflia','nikhilprabhakar',
 'oini','Jothirnadh','manings','Arunasank','sanjayb','saikabhi','aarthy','bkowshik','nammala','poornibadrinath','ajithranka',
 'manoharuss','Maanya','BharataHS','ridixcr','yurasi','piligab'];
-var count = 0;
+
+var mapboxCount = 0;
+var otherCount = 0;
 
 stream.on('data', function (data) {
     var f;
     var tags = data.tags();
-
-   
     if (tags.hasOwnProperty('type') && tags.type === 'restriction') {
-    	
-    	
-    	
-    	if ( ! (mappers.indexOf(data.user) < 0 )){
-    		 console.log(data);
-    		 count++;
-    		 console.log(count, "features from the team!");
-    		 
-    	}
-        
-    };
-   //count not accessible here 
-   
+        if (!(mappers.indexOf(data.user) < 0 )) {
+           mapboxCount = mapboxCount + 1;
+       } else {
+        otherCount = otherCount + 1
+       }
+   }
 });
 
 stream.on('end', function() {
-    process.stderr.write('done'); //count not accessible here
+    process.stderr.write('TR by Mapbox: ' + String(mapboxCount) + '\n');
+    process.stderr.write('TR by Others: ' + String(otherCount) + '\n');
 });
-
-
-
-
-
