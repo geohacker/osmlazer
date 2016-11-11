@@ -6,8 +6,7 @@ var team = require('mapbox-data-team').getUsernames();
 
 var file = new osmium.File(argv.file);
 var reader = new osmium.Reader(file);
-var location_handler = new osmium.LocationHandler();
-var stream = new osmium.Stream(new osmium.Reader(file, location_handler));
+var stream = new osmium.Stream(new osmium.Reader(file, {relation: true, node: false, ways: false}));
 
 var mapboxCount = 0;
 var otherCount = 0;
