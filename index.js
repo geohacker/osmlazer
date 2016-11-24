@@ -28,7 +28,7 @@ stream.on('end', function() {
 function getFeature(d) {
     var feature = {
         'type': 'Feature',
-        'id':d.id,
+        'osm_id':d.id,
         'geometry': d.geojson(),
         'properties': d.tags()
     };
