@@ -3,19 +3,22 @@ var argv = require('minimist')(process.argv.slice(2));
 var ff = require('feature-filter');
 var turf = require('turf');
 var lineDistance = require('turf-line-distance');
-var fs = require('fs');
 
+var fs = require('fs');
 
 var file = new osmium.File(argv.file);
 var reader = new osmium.Reader(file);
-var stream = new osmium.Stream(new osmium.Reader(file));
+var location_handler = new osmium.LocationHandler("dense_mmap_array");
+var handler = new osmium.Handler();
+osmium.apply(reader, location_handler, handler);
+var stream = new osmium.Stream(new osmium.Reader(file, location_handler));
 
 var countJson = {};
 
 stream.on('data', function (data) {
     var f;
     var tags = data.tags();
-    var geometry = data.geojson();
+ 
     if (tags.hasOwnProperty('type') && tags.type === 'restriction') {
         if (countJson.hasOwnProperty('restriction')){
           countJson['restriction']++;
@@ -24,7 +27,7 @@ stream.on('data', function (data) {
         }
 
     }
-    if (tags.hasOwnProperty('turn:lanes')) {
+    if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('turn:lanes')) {
         if (countJson.hasOwnProperty('turn_lanes')){
           countJson['turn_lanes']++;
         } else {
@@ -49,19 +52,26 @@ stream.on('data', function (data) {
    }
    if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('oneway') && tags.oneway === 'yes') {
         
-
         if (countJson.hasOwnProperty('oneway')){
           countJson['oneway']++;
         } else {
           countJson['oneway'] = 1;
         }
-        if (countJson.hasOwnProperty('l_oneway')){
-          countJson['l_oneway'] = countJson['l_oneway'] + turf.lineDistance(geometry, 'kilometers');
-        } else {
-          countJson['oneway'] = turf.lineDistance(geometry, 'kilometers');
-        }
+        //if (countJson.hasOwnProperty('l_oneway')){
+          //countJson['l_oneway'] = countJson['l_oneway'] + turf.lineDistance(geometry, 'kilometers');
+        //} else {
+          //countJson['oneway'] = turf.lineDistance(geometry, 'kilometers');
+        ///}
 
   }
+  if (tags.hasOwnProperty('building')) {
+        if (countJson.hasOwnProperty('buildings')){
+          countJson['buildings']++;
+        } else {
+          countJson['buildings'] = 1;
+        }
+
+    }
     if (tags.hasOwnProperty('building') && tags.hasOwnProperty('height')) {
         if (countJson.hasOwnProperty('3D_buildings')){
           countJson['3D_buildings']++;
@@ -71,7 +81,13 @@ stream.on('data', function (data) {
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'primary') {
-        if (countJson.hasOwnProperty('primary')){
+     var length = turf.lineDistance(data.geojson(), 'kilometers');
+if (countJson.hasOwnProperty('l_primary')){
+countJson['l_primary'] = length + countJson['l_primary'];
+}else{
+countJson['l_primary']=length;
+} 
+      if (countJson.hasOwnProperty('primary')){
           countJson['primary']++;
         } else {
           countJson['primary'] = 1;
