@@ -64,7 +64,7 @@ stream.on('data', function (data) {
         ///}
 
   }
-  if (tags.hasOwnProperty('building')) {
+  if (tags.hasOwnProperty('building') && (data.type==='way' || data.type === 'relation')) {
         if (countJson.hasOwnProperty('buildings')){
           countJson['buildings']++;
         } else {
@@ -72,7 +72,7 @@ stream.on('data', function (data) {
         }
 
     }
-    if (tags.hasOwnProperty('building') && tags.hasOwnProperty('height')) {
+    if (tags.hasOwnProperty('building') && tags.hasOwnProperty('height') && (data.type ==='way' || data.type === 'relation')) {
         if (countJson.hasOwnProperty('3D_buildings')){
           countJson['3D_buildings']++;
         } else {
@@ -80,21 +80,35 @@ stream.on('data', function (data) {
         }
 
     }
-    if (tags.hasOwnProperty('highway') && tags.highway === 'primary') {
-     var length = turf.lineDistance(data.geojson(), 'kilometers');
-if (countJson.hasOwnProperty('l_primary')){
-countJson['l_primary'] = length + countJson['l_primary'];
-}else{
-countJson['l_primary']=length;
-} 
-      if (countJson.hasOwnProperty('primary')){
-          countJson['primary']++;
+    if (tags.hasOwnProperty('wikidata')) {
+        if (countJson.hasOwnProperty('wikidata')){
+          countJson['wikidata']++;
         } else {
-          countJson['primary'] = 1;
+          countJson['wikidata'] = 1;
         }
 
     }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'primary') {
+     var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_primary')){
+        countJson['l_primary'] = length + countJson['l_primary'];
+     } else {
+        countJson['l_primary']=length;
+     } 
+     if (countJson.hasOwnProperty('primary')){
+        countJson['primary']++;
+        } else {
+          countJson['primary'] = 1;
+      }
+
+    }
     if (tags.hasOwnProperty('highway') && tags.highway === 'primary_link') {
+      var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_primary_link')){
+        countJson['l_primary_link'] = length + countJson['l_primary_link'];
+     } else {
+        countJson['l_primary_link']=length;
+     } 
         if (countJson.hasOwnProperty('primary_link')){
           countJson['primary_link']++;
         } else {
@@ -103,6 +117,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'secondary') {
+      var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_secondary')){
+        countJson['l_secondary'] = length + countJson['l_secondary'];
+     } else {
+        countJson['l_secondary']=length;
+     } 
         if (countJson.hasOwnProperty('secondary')){
           countJson['secondary']++;
         } else {
@@ -111,6 +131,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'secondary_link') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_secondary_link')){
+        countJson['l_secondary_link'] = length + countJson['l_secondary_link'];
+     } else {
+        countJson['l_secondary_link']=length;
+     } 
         if (countJson.hasOwnProperty('secondary_link')){
           countJson['secondary_link']++;
         } else {
@@ -119,6 +145,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'tertiary') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_tertiary')){
+        countJson['l_tertiary'] = length + countJson['l_tertiary'];
+     } else {
+        countJson['l_tertiary']=length;
+     } 
         if (countJson.hasOwnProperty('tertiary')){
           countJson['tertiary']++;
         } else {
@@ -127,6 +159,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'tertiary_link') {
+      var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_tertiary_link')){
+        countJson['l_tertiary_link'] = length + countJson['l_tertiary_link'];
+     } else {
+        countJson['l_tertiary_link']=length;
+     } 
         if (countJson.hasOwnProperty('tertiary_link')){
           countJson['tertiary_link']++;
         } else {
@@ -135,6 +173,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'motorway') {
+      var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_motorway')){
+        countJson['l_motorway'] = length + countJson['l_motorway'];
+     } else {
+        countJson['l_motorway']=length;
+     } 
         if (countJson.hasOwnProperty('motorway')){
           countJson['motorway']++;
         } else {
@@ -143,6 +187,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'motorway_link') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_motorway_link')){
+        countJson['l_motorway_link'] = length + countJson['l_motorway_link'];
+     } else {
+        countJson['l_motorway_link']=length;
+     } 
         if (countJson.hasOwnProperty('motorway_link')){
           countJson['motorway_link']++;
         } else {
@@ -151,6 +201,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'trunk') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_trunk')){
+        countJson['l_trunk'] = length + countJson['l_trunk'];
+     } else {
+        countJson['l_trunk']=length;
+     } 
         if (countJson.hasOwnProperty('trunk')){
           countJson['trunk']++;
         } else {
@@ -159,6 +215,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'trunk_link') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_trunk_link')){
+        countJson['l_trunk_link'] = length + countJson['l_trunk_link'];
+     } else {
+        countJson['l_trunk_link']=length;
+     } 
         if (countJson.hasOwnProperty('trunk_link')){
           countJson['trunk_link']++;
         } else {
@@ -167,6 +229,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'residential') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_residential')){
+        countJson['l_residential'] = length + countJson['l_residential'];
+     } else {
+        countJson['l_residential']=length;
+     } 
         if (countJson.hasOwnProperty('residential')){
           countJson['residential']++;
         } else {
@@ -175,6 +243,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'unclassified') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_unclassified')){
+        countJson['l_unclassified'] = length + countJson['l_unclassified'];
+     } else {
+        countJson['l_unclassified']=length;
+     } 
         if (countJson.hasOwnProperty('unclassified')){
           countJson['unclassified']++;
         } else {
@@ -183,6 +257,12 @@ countJson['l_primary']=length;
 
     }
      if (tags.hasOwnProperty('highway') && tags.highway === 'service') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_service')){
+        countJson['l_service'] = length + countJson['l_service'];
+     } else {
+        countJson['l_service']=length;
+     } 
         if (countJson.hasOwnProperty('service')){
           countJson['service']++;
         } else {
@@ -191,6 +271,12 @@ countJson['l_primary']=length;
 
     }
     if (tags.hasOwnProperty('highway') && tags.highway === 'living_street') {
+       var length = turf.lineDistance(data.geojson(), 'kilometers');
+     if (countJson.hasOwnProperty('l_living_street')){
+        countJson['l_living_street'] = length + countJson['l_living_street'];
+     } else {
+        countJson['l_living_street']=length;
+     } 
         if (countJson.hasOwnProperty('living_street')){
           countJson['living_street']++;
         } else {
