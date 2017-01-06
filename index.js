@@ -1,6 +1,8 @@
 var osmium = require('osmium');
 var argv = require('minimist')(process.argv.slice(2));
 var ff = require('feature-filter');
+var turf = require('turf');
+var lineDistance = require('turf-line-distance');
 var fs = require('fs');
 
 
@@ -13,6 +15,7 @@ var countJson = {};
 stream.on('data', function (data) {
     var f;
     var tags = data.tags();
+    var geometry = data.geojson();
     if (tags.hasOwnProperty('type') && tags.type === 'restriction') {
         if (countJson.hasOwnProperty('restriction')){
           countJson['restriction']++;
@@ -45,10 +48,17 @@ stream.on('data', function (data) {
         }
    }
    if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('oneway') && tags.oneway === 'yes') {
+        
+
         if (countJson.hasOwnProperty('oneway')){
           countJson['oneway']++;
         } else {
           countJson['oneway'] = 1;
+        }
+        if (countJson.hasOwnProperty('l_oneway')){
+          countJson['l_oneway'] = countJson['l_oneway'] + turf.lineDistance(geometry, 'kilometers');
+        } else {
+          countJson['oneway'] = turf.lineDistance(geometry, 'kilometers');
         }
 
   }
