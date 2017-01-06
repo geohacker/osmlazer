@@ -14,7 +14,7 @@ stream.on('data', function (data) {
     var f;
     var tags = data.tags();
     if (tags.hasOwnProperty('type') && tags.type === 'restriction') {
-        if countJson.hasOwnProperty('restriction'){
+        if (countJson.hasOwnProperty('restriction')){
           countJson['restriction'] = countJson['restriction']+1;
         } else {
           countJson['restriction'] = 1;
