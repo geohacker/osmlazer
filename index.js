@@ -21,14 +21,37 @@ stream.on('data', function (data) {
         }
 
     }
-    if (tags.hasOwnProperty('building')) {
-        if (countJson.hasOwnProperty('buildings')){
-          countJson['buildings']++;
+    if (tags.hasOwnProperty('turn:lanes')) {
+        if (countJson.hasOwnProperty('turn_lanes')){
+          countJson['turn_lanes']++;
         } else {
-          countJson['buildings'] = 1;
+          countJson['turn_lanes'] = 1;
         }
 
     }
+
+    if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('destination')) {
+        if (countJson.hasOwnProperty('destination')){
+          countJson['destination']++;
+        } else {
+          countJson['destination'] = 1;
+        }
+   }
+   if (tags.hasOwnProperty('highway') && tags.highway === 'motorway_junction' && tags.hasOwnProperty('ref')) {
+        if (countJson.hasOwnProperty('exit')){
+          countJson['exit']++;
+        } else {
+          countJson['exit'] = 1;
+        }
+   }
+   if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('oneway') && tags.oneway === 'yes') {
+        if (countJson.hasOwnProperty('oneway')){
+          countJson['oneway']++;
+        } else {
+          countJson['oneway'] = 1;
+        }
+
+  }
     if (tags.hasOwnProperty('building') && tags.hasOwnProperty('height')) {
         if (countJson.hasOwnProperty('3D_buildings')){
           countJson['3D_buildings']++;
