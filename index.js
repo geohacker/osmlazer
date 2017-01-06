@@ -15,13 +15,28 @@ stream.on('data', function (data) {
     var tags = data.tags();
     if (tags.hasOwnProperty('type') && tags.type === 'restriction') {
         if (countJson.hasOwnProperty('restriction')){
-          countJson['restriction'] = countJson['restriction']+1;
+          countJson['restriction']++;
         } else {
           countJson['restriction'] = 1;
         }
 
-        
-   }
+    }
+    if (tags.hasOwnProperty('building')) {
+        if (countJson.hasOwnProperty('buildings')){
+          countJson['buildings']++;
+        } else {
+          countJson['buildings'] = 1;
+        }
+
+    }
+    if (tags.hasOwnProperty('building') && tags.hasOwnProperty('height')) {
+        if (countJson.hasOwnProperty('3D_buildings')){
+          countJson['3D_buildings']++;
+        } else {
+          countJson['3D_buildings'] = 1;
+        }
+
+    }
 });
 
 stream.on('end', function() {
