@@ -7,23 +7,51 @@ var fs = require('fs');
 
 var file = new osmium.File(argv.file);
 var reader = new osmium.Reader(file);
-var location_handler = new osmium.LocationHandler("dense_mmap_array");
+var location_handler = new osmium.LocationHandler();
 var handler = new osmium.Handler();
 osmium.apply(reader, location_handler, handler);
 var stream = new osmium.Stream(new osmium.Reader(file, location_handler));
 
 var countJson = {};
+var addrID_n = [];
+var addrID_w = [];
+var addrID_r = [];
 
 stream.on('data', function (data) {
-    var f;
-    var tags = data.tags();
+  var tags = data.tags();
+  
+  Object.keys(tags).forEach(function( key ){
+    if (key.indexOf('addr') > -1)
+    { 
+      if (data.type === 'node'){
+        
+        if (addrID_n.indexOf(data.id) < 0){
+          addrID_n.push(data.id);
+        }
+      } else if(data.type === 'way'){
+        if (addrID_w.indexOf(data.id) < 0){
+          addrID_w.push(data.id);
+        }
+      } else if(data.type === 'relation'){
+        if (addrID_r.indexOf(data.id) < 0){
+          addrID_r.push(data.id);
+        }
+      } 
+      
+      // if (countJson.hasOwnProperty('addr')){
+      //   countJson['addr']++;
+      // } else {
+      //   countJson['addr'] = 1;
+      // }
+    }
+  });
  
   if (tags.hasOwnProperty('type') && tags.type === 'restriction') {       
-      if (countJson.hasOwnProperty('restriction')){
-        countJson['restriction']++;
-      } else {
-        countJson['restriction'] = 1;
-      }
+    if (countJson.hasOwnProperty('restriction')){
+      countJson['restriction']++;
+    } else {
+      countJson['restriction'] = 1;
+    }
 
   }
   if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('turn:lanes')) {
@@ -53,17 +81,34 @@ stream.on('data', function (data) {
     }
   }
   if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('oneway') && tags.oneway === 'yes') {
-        
+    try{    
+      var length = turf.lineDistance(data.geojson(), 'kilometers');
+      if (countJson.hasOwnProperty('l_oneway')){
+        countJson['l_oneway'] = length + countJson['l_oneway'];
+      } else {
+        countJson['l_oneway']=length;
+      }} catch (e){}
     if (countJson.hasOwnProperty('oneway')){
       countJson['oneway']++;
     } else {
       countJson['oneway'] = 1;
     }
-        //if (countJson.hasOwnProperty('l_oneway')){
-          //countJson['l_oneway'] = countJson['l_oneway'] + turf.lineDistance(geometry, 'kilometers');
-        //} else {
-          //countJson['oneway'] = turf.lineDistance(geometry, 'kilometers');
-        ///}
+  }
+  if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('name')) {
+
+    try{    
+      var length = turf.lineDistance(data.geojson(), 'kilometers');
+      if (countJson.hasOwnProperty('l_named_highway')){
+        countJson['l_named_highway'] = length + countJson['l_named_highway'];
+      } else {
+        countJson['l_named_highway']=length;
+      }} catch (e){}
+    if (countJson.hasOwnProperty('named_highway')){
+      countJson['named_highway']++;
+    } else {
+      countJson['named_highway'] = 1;
+    }
+
   }
   if (tags.hasOwnProperty('building') && (data.type==='way' || data.type === 'relation')) {
      
@@ -322,6 +367,8 @@ stream.on('data', function (data) {
 });
 
 stream.on('end', function() {
+  countJson['addr'] = addrID_n.length + addrID_w.length+ addrID_r.length;
   process.stderr.write(JSON.stringify(countJson) + '\n');
+ 
     
 });
