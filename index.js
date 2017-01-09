@@ -13,7 +13,7 @@ var count =0, wikidata_count=0, both_count=0, just_wikidata_count=0, just_wikipe
 stream.on('data', function (data) {
   var f;
   var tags = data.tags();
-  if (tags.hasOwnProperty('place') && tags.place === 'neighbourhood'  && data.type === 'node') {
+  if (tags.hasOwnProperty('place') && tags.place === 'country'  && data.type === 'node') {
     count++;
     if (tags.hasOwnProperty('wikidata')){
       try {
