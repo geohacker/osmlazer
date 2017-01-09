@@ -11,6 +11,8 @@
   "dependencies": {
     "feature-filter": "^2.2.0",
     "minimist": "^1.2.0",
-    "osmium": "^0.5.3"
+    "osmium": "^0.5.3",
+    "turf": "^3.0.14",
+    "turf-line-distance": "^3.0.12"
   }
 }
