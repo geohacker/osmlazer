@@ -15,16 +15,15 @@ stream.on('data', function (data) {
   var tags = data.tags();
   if (tags.hasOwnProperty('place') && tags.place === 'country'  && data.type === 'node') {
     count++;
-    if (tags.hasOwnProperty('wikidata')){
-      try {
+    try {
         f = getFeature(data);
         console.log(JSON.stringify(f));
-        wikidata_count++;
+       
         
       } catch (e) {
         return;
       }
-    } 
+    
     if(tags.hasOwnProperty('wikidata') && tags.hasOwnProperty('wikipedia')){
       both_count++;
 
@@ -45,12 +44,14 @@ stream.on('data', function (data) {
 });
 
 stream.on('end', function() {
-  process.stderr.write('Total number of countries: '+JSON.stringify(count) + '\n');
-  process.stderr.write('Wikidata: '+ JSON.stringify(wikidata_count) + '\n');
-  process.stderr.write('Only wikidata: '+JSON.stringify(just_wikidata_count)+'\n');
-  process.stderr.write('Only wikipedia: '+JSON.stringify(just_wikipedia_count)+'\n');
-  process.stderr.write('Both: '+JSON.stringify(both_count)+'\n');
-  process.stderr.write('None: '+JSON.stringify(notag_count)+'\n');
+  process.stderr.write('Total number of countries: '+String(count) + '\n');
+  
+  process.stderr.write('Only wikidata: '+String(just_wikidata_count)+'\n');
+  process.stderr.write('Only wikipedia: '+String(just_wikipedia_count)+'\n');
+  process.stderr.write('Both: '+String(both_count)+'\n');
+  process.stderr.write('None: '+String(notag_count)+'\n');
+
+  process.stderr.write("Total wikidata: "+ (just_wikidata_count+both_count)+'\n');
 });
 
 function getFeature(d) {
