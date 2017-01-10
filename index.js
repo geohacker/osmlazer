@@ -23,31 +23,6 @@ if (argv.mode === 'basemap'){
 stream.on('data', function (data) {
   var tags = data.tags();
   
-  Object.keys(tags).forEach(function( key ){
-    if (key.indexOf('addr') > -1)
-    { 
-      if (data.type === 'node'){
-        
-        if (addrID_n.indexOf(data.id) < 0){
-          addrID_n.push(data.id);
-        }
-      } else if(data.type === 'way'){
-        if (addrID_w.indexOf(data.id) < 0){
-          addrID_w.push(data.id);
-        }
-      } else if(data.type === 'relation'){
-        if (addrID_r.indexOf(data.id) < 0){
-          addrID_r.push(data.id);
-        }
-      } 
-      
-      // if (countJson.hasOwnProperty('addr')){
-      //   countJson['addr']++;
-      // } else {
-      //   countJson['addr'] = 1;
-      // }
-    }
-  });
  
   if (tags.hasOwnProperty('type') && tags.type === 'restriction') {       
     if (countJson.hasOwnProperty('restriction')){
@@ -414,9 +389,7 @@ stream.on('data', function (data) {
 }
 
 stream.on('end', function() {
-  if(argv.mode === 'basemap'){
-
-  } else if (argv.mode === 'density'){
+  if (argv.mode === 'address'){
     countJson['addr'] = addrID_n.length + addrID_w.length+ addrID_r.length;
 
   }
