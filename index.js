@@ -375,6 +375,8 @@ stream.on('data', function (data) {
 
   });
 
+} else if (argv.mode === 'address') {
+  console.log('Please enter a valid mode!');
 } else {
   console.log('Please enter a valid mode!');
 }
