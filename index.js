@@ -17,6 +17,9 @@ var addrID_n = [];
 var addrID_w = [];
 var addrID_r = [];
 
+if (argv.mode === 'basemap'){
+
+
 stream.on('data', function (data) {
   var tags = data.tags();
   
@@ -365,9 +368,25 @@ stream.on('data', function (data) {
 
   }
 });
+} else if(argv.mode === 'density'){
+  console.log('density mode');
+
+  stream.on('data', function (data) {
+
+  });
+
+} else {
+  console.log('Please enter a valid mode!');
+}
 
 stream.on('end', function() {
-  countJson['addr'] = addrID_n.length + addrID_w.length+ addrID_r.length;
+  if(argv.mode === 'basemap'){
+
+  } else if (argv.mode === 'density'){
+    countJson['addr'] = addrID_n.length + addrID_w.length+ addrID_r.length;
+
+  }
+  
   process.stderr.write(JSON.stringify(countJson) + '\n');
  
     
