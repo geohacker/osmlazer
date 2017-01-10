@@ -376,7 +376,39 @@ stream.on('data', function (data) {
   });
 
 } else if (argv.mode === 'address') {
-  console.log('Please enter a valid mode!');
+  
+  stream.on('data', function (data) {
+    var tags = data.tags();
+    Object.keys(tags).forEach(function( key ){
+    if (key.indexOf('addr') > -1)
+    { 
+      if (data.type === 'node'){
+        
+        if (addrID_n.indexOf(data.id) < 0){
+          addrID_n.push(data.id);
+        }
+      } else if(data.type === 'way'){
+        if (addrID_w.indexOf(data.id) < 0){
+          addrID_w.push(data.id);
+        }
+      } else if(data.type === 'relation'){
+        if (addrID_r.indexOf(data.id) < 0){
+          addrID_r.push(data.id);
+        }
+      } 
+      
+      // if (countJson.hasOwnProperty('addr')){
+      //   countJson['addr']++;
+      // } else {
+      //   countJson['addr'] = 1;
+      // }
+    }
+  });
+
+  });
+  
+ 
+  
 } else {
   console.log('Please enter a valid mode!');
 }
