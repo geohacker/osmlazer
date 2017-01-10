@@ -388,7 +388,7 @@ stream.on('data', function (data) {
       if (countJson.hasOwnProperty('l_primary')){
         countJson['l_primary']++;
       } else {
-        countJson['l_primary_link'] = 1;
+        countJson['l_primary'] = 1;
       }
 
     }
