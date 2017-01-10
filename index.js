@@ -345,8 +345,125 @@ stream.on('data', function (data) {
 });
 } else if(argv.mode === 'density'){
   console.log('density mode');
-
   stream.on('data', function (data) {
+    var tags = data.tags();
+    if (tags.hasOwnProperty('highway') && tags.highway === 'motorway' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_motorway')){
+        countJson['l_motorway']++;
+      } else {
+        countJson['l_motorway'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'motorway_link' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_motorway_link')){
+        countJson['l_motorway_link']++;
+      } else {
+        countJson['l_motorway_link'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'trunk' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_trunk')){
+        countJson['l_trunk']++;
+      } else {
+        countJson['l_trunk'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'trunk_link' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_trunk_link')){
+        countJson['l_trunk_link']++;
+      } else {
+        countJson['l_trunk_link'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'primary' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_primary')){
+        countJson['l_primary']++;
+      } else {
+        countJson['l_primary_link'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'primary_link' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_primary_link')){
+        countJson['l_primary_link']++;
+      } else {
+        countJson['l_primary_link'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'secondary' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_secondary')){
+        countJson['l_secondary']++;
+      } else {
+        countJson['l_secondary'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'secondary_link' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_secondary_link')){
+        countJson['l_secondary_link']++;
+      } else {
+        countJson['l_secondary_link'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'tertiary' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_tertiary')){
+        countJson['l_tertiary']++;
+      } else {
+        countJson['l_tertiary'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'tertiary_link' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_tertiary_link')){
+        countJson['l_tertiary_link']++;
+      } else {
+        countJson['l_tertiary_link'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'residential' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_residential')){
+        countJson['l_residential']++;
+      } else {
+        countJson['l_residential'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'unclassified' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_unclassified')){
+        countJson['l_unclassified']++;
+      } else {
+        countJson['l_unclassified'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'service' && tags.hasOwnProperty(argv.asset)) {
+    
+      if (countJson.hasOwnProperty('l_service')){
+        countJson['l_service']++;
+      } else {
+        countJson['l_service'] = 1;
+      }
+
+    }
 
   });
 
