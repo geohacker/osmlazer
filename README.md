@@ -23,7 +23,8 @@ brew install autoconf automake libtool makedepend
 
 ## Usage
 
-```node index.js --file /path/to/pbf --mode specify_your_mode
+```
+node index.js --file /path/to/pbf --mode specify_your_mode
 
 mode can be basemap/density/poi/address
 
