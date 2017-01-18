@@ -22,6 +22,56 @@ if (argv.mode === 'basemap'){
 
   stream.on('data', function (data) {
     var tags = data.tags();
+
+    if (tags.hasOwnProperty('place') && tags.place === 'village' && data.type === 'node') {
+
+      if (countJson.hasOwnProperty('village')){
+        countJson['village']++;
+      } else {
+        countJson['village'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('place') && tags.place === 'suburb' && data.type === 'node') {
+      if (countJson.hasOwnProperty('suburb')){
+        countJson['suburb']++;
+      } else {
+        countJson['suburb'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('place') && tags.place === 'neighbourhood' && data.type === 'node') {       
+      if (countJson.hasOwnProperty('neighbourhood')){
+        countJson['neighbourhood']++;
+      } else {
+        countJson['neighbourhood'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('place') && tags.place === 'city' && data.type === 'node') {       
+      if (countJson.hasOwnProperty('city')){
+        countJson['city']++;
+      } else {
+        countJson['city'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('place') && tags.place === 'hamlet' && data.type === 'node') {       
+      if (countJson.hasOwnProperty('hamlet')){
+        countJson['hamlet']++;
+      } else {
+        countJson['hamlet'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('place') && tags.place === 'town' && data.type === 'node') {       
+      if (countJson.hasOwnProperty('town')){
+        countJson['town']++;
+      } else {
+        countJson['town'] = 1;
+      }
+
+    }
   
  
     if (tags.hasOwnProperty('type') && tags.type === 'restriction') {       
