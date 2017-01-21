@@ -907,7 +907,7 @@ stream.on('end', function() {
 
   }
   
-  process.stderr.write(JSON.stringify(countJson) + '\n');
+  console.log(JSON.stringify(countJson));
  
     
 });
