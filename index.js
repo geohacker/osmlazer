@@ -880,26 +880,32 @@ if (argv.mode === 'basemap'){
 stream.on('end', function() {
 
   if (argv.mode === 'basemap'){
-    countJson['motorable_length'] = countJson['l_motorway'] + countJson['l_motorway_link']+
-                                    countJson['l_trunk'] + countJson['l_trunk_link']+
-                                    countJson['l_primary'] + countJson['l_primary_link']+
-                                    countJson['l_secondary'] + countJson['l_secondary_link']+
-                                    countJson['l_tertiary'] + countJson['l_tertiary_link']+
-                                    countJson['l_residential']+
-                                    countJson['l_unclassified']+
-                                    countJson['l_service'];
-    countJson['nonmotorable_length'] = countJson['l_footway'] + 
-                                       countJson['l_path']+
-                                       countJson['l_track'];
-                                    
-    countJson['motorable_name']  = countJson['named_motorway'] + countJson['named_motorway_link']+
-                                   countJson['named_trunk'] + countJson['named_trunk_link']+
-                                   countJson['named_primary'] + countJson['named_primary_link']+
-                                   countJson['named_secondary'] + countJson['named_secondary_link']+
-                                   countJson['named_tertiary'] + countJson['named_tertiary_link']+
-                                   countJson['named_residential']+
-                                   countJson['named_unclassified']+
-                                   countJson['named_service'];                              
+    var motorable = ['motorway','motorway_link','trunk','trunk_link','primary',
+                    'primary_link','secondary','secondary_link','tertiary',
+                    'tertiary_link','residential','unclassified','service'];
+    var nonmotorable = ['footway','path','track'];
+    var nonmotorable_length=0;
+    var motorable_length=0;
+    var motorable_name=0;
+
+    motorable.forEach(function(item){
+      if(countJson.hasOwnProperty('l_'+item)){
+        motorable_length = motorable_length + countJson['l_'+item];
+
+      }
+      if(countJson.hasOwnProperty('named_'+item)){
+        motorable_name = motorable_name + countJson['named_'+item];
+
+      }
+
+    });
+    nonmotorable.forEach(function(item){
+      if(countJson.hasOwnProperty('l_'+item)){
+        nonmotorable_length = nonmotorable_length + countJson['l_'+item];
+
+      }
+
+    });                            
 
   }
   if (argv.mode === 'address'){
@@ -907,7 +913,7 @@ stream.on('end', function() {
 
   }
   
-  console.log(JSON.stringify(countJson));
+  console.log(countJson);
  
     
 });
