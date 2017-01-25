@@ -890,6 +890,7 @@ stream.on('end', function() {
 
     motorable.forEach(function(item){
       if(countJson.hasOwnProperty('l_'+item)){
+
         motorable_length = motorable_length + countJson['l_'+item];
 
       }
@@ -905,7 +906,10 @@ stream.on('end', function() {
 
       }
 
-    });                            
+    }); 
+    countJson['motorable_length'] = motorable_length;
+    countJson['nonmotorable_length'] = nonmotorable_length;
+    countJson['motorable_name'] = motorable_name;
 
   }
   if (argv.mode === 'address'){
