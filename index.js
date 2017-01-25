@@ -913,7 +913,7 @@ stream.on('end', function() {
 
   }
   
-  console.log(countJson);
+  console.log(JSON.stringify(countJson));
  
     
 });
