@@ -91,6 +91,15 @@ if (argv.mode === 'basemap'){
       }
 
     }
+
+    if (tags.hasOwnProperty('leisure') && tags.leisure === 'park' && data.type === 'way') {       
+      if (countJson.hasOwnProperty('park')){
+        countJson['park']++;
+      } else {
+        countJson['park'] = 1;
+      }
+
+    }
     if (tags.hasOwnProperty('highway') && (tags.hasOwnProperty('turn:lanes') || tags.hasOwnProperty('turn:lanes:backward') || tags.hasOwnProperty('turn:lanes:forward'))){
 
       if (countJson.hasOwnProperty('turn_lanes')){
