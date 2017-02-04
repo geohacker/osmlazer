@@ -72,6 +72,15 @@ if (argv.mode === 'basemap'){
       }
 
     }
+    if (tags.hasOwnProperty('waterway') && data.type === 'way' && (tags.waterway === 'river' || tags.waterway === 'stream' || tags.waterway === 'canal')) {
+
+      if (countJson.hasOwnProperty('turn_lanes')){
+        countJson['waterway']++;
+      } else {
+        countJson['waterway'] = 1;
+      }
+
+    }
   
  
     if (tags.hasOwnProperty('type') && tags.type === 'restriction') {       
@@ -82,7 +91,7 @@ if (argv.mode === 'basemap'){
       }
 
     }
-    if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('turn:lanes')) {
+    if (tags.hasOwnProperty('highway') && (tags.hasOwnProperty('turn:lanes') || tags.hasOwnProperty('turn:lanes:backward') || tags.hasOwnProperty('turn:lanes:forward')) {
 
       if (countJson.hasOwnProperty('turn_lanes')){
         countJson['turn_lanes']++;
