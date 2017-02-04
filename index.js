@@ -91,7 +91,7 @@ if (argv.mode === 'basemap'){
       }
 
     }
-    if (tags.hasOwnProperty('highway') && (tags.hasOwnProperty('turn:lanes') || tags.hasOwnProperty('turn:lanes:backward') || tags.hasOwnProperty('turn:lanes:forward')) {
+    if (tags.hasOwnProperty('highway') && (tags.hasOwnProperty('turn:lanes') || tags.hasOwnProperty('turn:lanes:backward') || tags.hasOwnProperty('turn:lanes:forward'))){
 
       if (countJson.hasOwnProperty('turn_lanes')){
         countJson['turn_lanes']++;
