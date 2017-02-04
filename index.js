@@ -74,7 +74,7 @@ if (argv.mode === 'basemap'){
     }
     if (tags.hasOwnProperty('waterway') && data.type === 'way' && (tags.waterway === 'river' || tags.waterway === 'stream' || tags.waterway === 'canal')) {
 
-      if (countJson.hasOwnProperty('turn_lanes')){
+      if (countJson.hasOwnProperty('waterway')){
         countJson['waterway']++;
       } else {
         countJson['waterway'] = 1;
