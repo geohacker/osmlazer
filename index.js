@@ -79,6 +79,14 @@ if (argv.mode === 'basemap'){
       } else {
         countJson['waterway'] = 1;
       }
+      if (tags.hasOwnProperty('name')){
+        if (countJson.hasOwnProperty('named_waterway')){
+          countJson['named_waterway']++;
+        } else {
+          countJson['named_waterway'] = 1;
+        }
+
+      }
 
     }
   
@@ -98,6 +106,15 @@ if (argv.mode === 'basemap'){
       } else {
         countJson['park'] = 1;
       }
+       if (tags.hasOwnProperty('name')){
+        if (countJson.hasOwnProperty('named_park')){
+          countJson['named_park']++;
+        } else {
+          countJson['named_park'] = 1;
+        }
+
+      }
+      
 
     }
     if (tags.hasOwnProperty('highway') && (tags.hasOwnProperty('turn:lanes') || tags.hasOwnProperty('turn:lanes:backward') || tags.hasOwnProperty('turn:lanes:forward'))){
@@ -110,7 +127,7 @@ if (argv.mode === 'basemap'){
 
     }
 
-    if (tags.hasOwnProperty('highway') && tags.hasOwnProperty('destination')) {
+    if (tags.hasOwnProperty('highway') && (tags.hasOwnProperty('destination')) || tags.hasOwnProperty('destination:street') ) {
        
       if (countJson.hasOwnProperty('destination')){
         countJson['destination']++;
