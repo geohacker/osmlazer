@@ -106,7 +106,7 @@ if (argv.mode === 'basemap'){
       } else {
         countJson['park'] = 1;
       }
-       if (tags.hasOwnProperty('name')){
+      if (tags.hasOwnProperty('name')){
         if (countJson.hasOwnProperty('named_park')){
           countJson['named_park']++;
         } else {
@@ -217,6 +217,13 @@ if (argv.mode === 'basemap'){
             countJson['named_primary']=length;
           }
         }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_primary')){
+            countJson['oneway_primary'] = length + countJson['oneway_primary'];
+          } else {
+            countJson['oneway_primary']=length;
+          }
+        }
       }
        catch(e){}
 
@@ -243,7 +250,15 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_primary_link']=length;
           }
-        }}
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_primary_link')){
+            countJson['oneway_primary_link'] = length + countJson['oneway_primary_link'];
+          } else {
+            countJson['oneway_primary_link']=length;
+          }
+        }
+      }
       catch(e){}
       if (countJson.hasOwnProperty('primary_link')){
         countJson['primary_link']++;
@@ -266,7 +281,15 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_secondary']=length;
           }
-        }}
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_secondary')){
+            countJson['oneway_secondary'] = length + countJson['oneway_secondary'];
+          } else {
+            countJson['oneway_secondary']=length;
+          }
+        }
+      }
       catch(e){}
       if (countJson.hasOwnProperty('secondary')){
         countJson['secondary']++;
@@ -290,6 +313,13 @@ if (argv.mode === 'basemap'){
             countJson['named_secondary_link']=length;
           }
         } 
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_secondary_link')){
+            countJson['oneway_secondary_link'] = length + countJson['oneway_secondary_link'];
+          } else {
+            countJson['oneway_secondary_link']=length;
+          }
+        }
       }
    catch(e){}
       if (countJson.hasOwnProperty('secondary_link')){
@@ -313,7 +343,15 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_tertiary']=length;
           }
-        }}
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_tertiary')){
+            countJson['oneway_tertiary'] = length + countJson['oneway_tertiary'];
+          } else {
+            countJson['oneway_tertiary']=length;
+          }
+        }
+      }
      catch(e){}
       if (countJson.hasOwnProperty('tertiary')){
         countJson['tertiary']++;
@@ -335,6 +373,13 @@ if (argv.mode === 'basemap'){
             countJson['named_tertiary_link'] = length + countJson['named_tertiary_link'];
           } else {
             countJson['named_tertiary_link']=length;
+          }
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_tertiary_link')){
+            countJson['oneway_tertiary_link'] = length + countJson['oneway_tertiary_link'];
+          } else {
+            countJson['oneway_tertiary_link']=length;
           }
         }
       }
@@ -360,6 +405,13 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_motorway']=length;
           }
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes'){
+          if (countJson.hasOwnProperty('oneway_motorway')){
+            countJson['oneway_motorway'] = length + countJson['oneway_motorway'];
+          } else {
+            countJson['oneway_motorway']=length;
+          }
         }}
      catch(e){}
       if (countJson.hasOwnProperty('motorway')){
@@ -383,7 +435,15 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_motorway_link']=length;
           }
-        }}
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_motorway_link')){
+            countJson['oneway_motorway_link'] = length + countJson['oneway_motorway_link'];
+          } else {
+            countJson['oneway_motorway_link']=length;
+          }
+        }
+      }
      catch(e){}
       if (countJson.hasOwnProperty('motorway_link')){
         countJson['motorway_link']++;
@@ -405,8 +465,16 @@ if (argv.mode === 'basemap'){
             countJson['named_trunk'] = length + countJson['named_trunk'];
           } else {
            countJson['named_trunk']=length;
-         }
-       }} 
+          }
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_primary')){
+            countJson['oneway_trunk'] = length + countJson['oneway_trunk'];
+          } else {
+            countJson['oneway_trunk']=length;
+          }
+        }
+      } 
       catch(e) {}
       if (countJson.hasOwnProperty('trunk')){
         countJson['trunk']++;
@@ -429,7 +497,15 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_trunk_link']=length;
           }
-        }}
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes'){
+          if (countJson.hasOwnProperty('oneway_trunk_link')){
+            countJson['oneway_trunk_link'] = length + countJson['oneway_trunk_link'];
+          } else {
+            countJson['oneway_trunk_link']=length;
+          }
+        }
+      }
      catch(e){} 
       if (countJson.hasOwnProperty('trunk_link')){
         countJson['trunk_link']++;
@@ -453,7 +529,15 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_residential']=length;
           }
-        }}
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_residential')){
+            countJson['oneway_residential'] = length + countJson['oneway_residential'];
+          } else {
+            countJson['oneway_residential']=length;
+          }
+        }
+      }
     catch (e){}    
       if (countJson.hasOwnProperty('residential')){
         countJson['residential']++;
@@ -476,7 +560,15 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_unclassified']=length;
           }
-        }} catch(e){}
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_unclassified')){
+            countJson['oneway_unclassified'] = length + countJson['oneway_unclassified'];
+          } else {
+            countJson['oneway_unclassified']=length;
+          }
+        }
+      } catch(e){}
       if (countJson.hasOwnProperty('unclassified')){
         countJson['unclassified']++;
       } else {
@@ -498,6 +590,13 @@ if (argv.mode === 'basemap'){
             countJson['named_service'] = length + countJson['named_service'];
           } else {
             countJson['named_service']=length;
+          }
+        }
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_trunk_link')){
+            countJson['oneway_service'] = length + countJson['oneway_service'];
+          } else {
+            countJson['oneway_service']=length;
           }
         }} catch (e){}
       if (countJson.hasOwnProperty('service')){
@@ -522,7 +621,14 @@ if (argv.mode === 'basemap'){
           } else {
             countJson['named_living_street']=length;
           }
-        } } catch(e) {}
+        } 
+        if (tags.hasOwnProperty('oneway') || tags.oneway ==='yes' ){
+          if (countJson.hasOwnProperty('oneway_living_street')){
+            countJson['oneway_living_street'] = length + countJson['oneway_living_street'];
+          } else {
+            countJson['oneway_living_street']=length;
+          }
+        }} catch(e) {}
       if (countJson.hasOwnProperty('living_street')){
         countJson['living_street']++;
       } else {
