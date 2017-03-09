@@ -762,6 +762,42 @@ if (argv.mode === 'basemap'){
       }
 
     }
+    if (tags.hasOwnProperty('footway') && tags.footway === 'sidewalk') {
+      try{
+     
+        var length = turf.lineDistance(data.geojson(), 'kilometers');
+        if (countJson.hasOwnProperty('l_sidewalk')){
+          countJson['l_sidewalk'] = length + countJson['l_sidewalk'];
+        } else {
+          countJson['l_sidewalk']=length;
+        }
+      
+      } catch(e) {}
+      if (countJson.hasOwnProperty('sidewalk')){
+        countJson['sidewalk']++;
+      } else {
+        countJson['sidewalk'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('footway') && tags.footway === 'crossing') {
+     
+      if (countJson.hasOwnProperty('crossing')){
+        countJson['crossing']++;
+      } else {
+        countJson['crossing'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('kerb') ) {
+     
+      if (countJson.hasOwnProperty('kerb')){
+        countJson['kerb']++;
+      } else {
+        countJson['kerb'] = 1;
+      }
+
+    }
     if (tags.hasOwnProperty('highway') && tags.highway === 'bus_stop' && data.type==='node') {
       try{
      
