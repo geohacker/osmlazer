@@ -690,6 +690,78 @@ if (argv.mode === 'basemap'){
       }
 
     }
+    if (tags.hasOwnProperty('railway') && tags.railway === 'rail' && !(tags.hasOwnProperty('service'))) {
+      try{
+     
+        var length = turf.lineDistance(data.geojson(), 'kilometers');
+        if (countJson.hasOwnProperty('l_rail')){
+          countJson['l_rail'] = length + countJson['l_rail'];
+        } else {
+          countJson['l_rail']=length;
+        }
+      
+      } catch(e) {}
+      if (countJson.hasOwnProperty('rail')){
+        countJson['rail']++;
+      } else {
+        countJson['rail'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('railway') && tags.railway === 'subway') {
+      try{
+     
+        var length = turf.lineDistance(data.geojson(), 'kilometers');
+        if (countJson.hasOwnProperty('l_subway')){
+          countJson['l_subway'] = length + countJson['l_subway'];
+        } else {
+          countJson['l_subway']=length;
+        }
+      
+      } catch(e) {}
+      if (countJson.hasOwnProperty('subway')){
+        countJson['subway']++;
+      } else {
+        countJson['subway'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('railway') && tags.railway === 'light_rail') {
+      try{
+     
+        var length = turf.lineDistance(data.geojson(), 'kilometers');
+        if (countJson.hasOwnProperty('l_light_rail')){
+          countJson['l_light_rail'] = length + countJson['l_light_rail'];
+        } else {
+          countJson['l_light_rail']=length;
+        }
+      
+      } catch(e) {}
+      if (countJson.hasOwnProperty('light_rail')){
+        countJson['light_rail']++;
+      } else {
+        countJson['light_rail'] = 1;
+      }
+
+    }
+    if (tags.hasOwnProperty('railway') && tags.railway === 'tram') {
+      try{
+     
+        var length = turf.lineDistance(data.geojson(), 'kilometers');
+        if (countJson.hasOwnProperty('l_tram')){
+          countJson['l_tram'] = length + countJson['l_tram'];
+        } else {
+          countJson['l_tram']=length;
+        }
+      
+      } catch(e) {}
+      if (countJson.hasOwnProperty('tram')){
+        countJson['tram']++;
+      } else {
+        countJson['tram'] = 1;
+      }
+
+    }
     if (tags.hasOwnProperty('highway') && tags.highway === 'bus_stop' && data.type==='node') {
       try{
      
