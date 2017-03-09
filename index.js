@@ -127,7 +127,7 @@ if (argv.mode === 'basemap'){
 
     }
 
-    if (tags.hasOwnProperty('highway') && (tags.hasOwnProperty('destination')) || tags.hasOwnProperty('destination:street') ) {
+    if (tags.hasOwnProperty('highway') &&(tags.highway==='motorway' || tags.highway==='motorway_link') && (tags.hasOwnProperty('destination')) || tags.hasOwnProperty('destination:street') ) {
        
       if (countJson.hasOwnProperty('destination')){
         countJson['destination']++;
