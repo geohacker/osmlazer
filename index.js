@@ -710,7 +710,7 @@ if (argv.mode === 'basemap'){
       
 
     }
-    if (tags.hasOwnProperty('railway') && tags.highway === 'tram_stop' && data.type==='node') {
+    if (tags.hasOwnProperty('railway') && tags.railway === 'tram_stop' && data.type==='node') {
       try{
      
         if (countJson.hasOwnProperty('tram_stop')){
@@ -730,7 +730,7 @@ if (argv.mode === 'basemap'){
       
 
     }
-    if (tags.hasOwnProperty('railway') && tags.highway === 'station') {
+    if (tags.hasOwnProperty('railway') && tags.railway === 'station') {
       try{
      
         if (countJson.hasOwnProperty('railway_station')){
@@ -750,7 +750,7 @@ if (argv.mode === 'basemap'){
       
 
     }
-    if (tags.hasOwnProperty('railway') && tags.highway === 'halt' && data.type==='node') {
+    if (tags.hasOwnProperty('railway') && tags.railway === 'halt' && data.type==='node') {
       try{
      
         if (countJson.hasOwnProperty('railway_halt')){
