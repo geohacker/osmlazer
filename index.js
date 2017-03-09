@@ -690,78 +690,251 @@ if (argv.mode === 'basemap'){
       }
 
     }
-    if (tags.hasOwnProperty('railway') && tags.railway === 'rail' && !(tags.hasOwnProperty('service'))) {
+    if (tags.hasOwnProperty('railway') && tags.railway === 'rail' && !tags.hasOwnProperty('service')) {
       try{
      
         var length = turf.lineDistance(data.geojson(), 'kilometers');
-        if (countJson.hasOwnProperty('l_rail')){
-          countJson['l_rail'] = length + countJson['l_rail'];
-        } else {
-          countJson['l_rail']=length;
-        }
-      
-      } catch(e) {}
-      if (countJson.hasOwnProperty('rail')){
-        countJson['rail']++;
-      } else {
-        countJson['rail'] = 1;
-      }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('l_named_rail')){
+            countJson['l_named_rail'] = length + countJson['l_named_rail'];
+          } else {
+            countJson['l_named_rail']=length;
+          }
+          if (countJson.hasOwnProperty('named_rail')){
+            countJson['named_rail']++;
+          } else {
+            countJson['named_rail']=1;
+          } 
 
-    }
+         
+        } else {
+          if (countJson.hasOwnProperty('rail')){
+            countJson['rail']++;
+          } else {
+            countJson['rail'] = 1;
+          }
+         
+          if (countJson.hasOwnProperty('l_rail')){
+
+            countJson['l_rail'] = length + countJson['l_rail'];
+          } else {
+            countJson['l_rail']=length;
+          }
+           
+        } 
+      }
+        catch(e) {}
+   }
     if (tags.hasOwnProperty('railway') && tags.railway === 'subway') {
       try{
      
         var length = turf.lineDistance(data.geojson(), 'kilometers');
-        if (countJson.hasOwnProperty('l_subway')){
-          countJson['l_subway'] = length + countJson['l_subway'];
-        } else {
-          countJson['l_subway']=length;
-        }
-      
-      } catch(e) {}
-      if (countJson.hasOwnProperty('subway')){
-        countJson['subway']++;
-      } else {
-        countJson['subway'] = 1;
-      }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('l_named_subway')){
+            countJson['l_named_subway'] = length + countJson['l_named_subway'];
+          } else {
+            countJson['l_named_subway']=length;
+          }
+          if (countJson.hasOwnProperty('named_subway')){
+            countJson['named_subway']++;
+          } else {
+            countJson['named_subway']=1;
+          } 
 
-    }
+         
+        } else {
+          if (countJson.hasOwnProperty('subway')){
+            countJson['subway']++;
+          } else {
+            countJson['subway'] = 1;
+          }
+         
+          if (countJson.hasOwnProperty('l_subway')){
+
+            countJson['l_subway'] = length + countJson['l_subway'];
+          } else {
+            countJson['l_subway']=length;
+          }
+           
+        } 
+      }
+        catch(e) {}
+   }
     if (tags.hasOwnProperty('railway') && tags.railway === 'light_rail') {
       try{
      
         var length = turf.lineDistance(data.geojson(), 'kilometers');
-        if (countJson.hasOwnProperty('l_light_rail')){
-          countJson['l_light_rail'] = length + countJson['l_light_rail'];
-        } else {
-          countJson['l_light_rail']=length;
-        }
-      
-      } catch(e) {}
-      if (countJson.hasOwnProperty('light_rail')){
-        countJson['light_rail']++;
-      } else {
-        countJson['light_rail'] = 1;
-      }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('l_named_light_rail')){
+            countJson['l_named_light_rail'] = length + countJson['l_named_light_rail'];
+          } else {
+            countJson['l_named_light_rail']=length;
+          }
+          if (countJson.hasOwnProperty('named_light_rail')){
+            countJson['named_light_rail']++;
+          } else {
+            countJson['named_light_rail']=1;
+          } 
 
-    }
+         
+        } else {
+          if (countJson.hasOwnProperty('light_rail')){
+            countJson['light_rail']++;
+          } else {
+            countJson['light_rail'] = 1;
+          }
+         
+          if (countJson.hasOwnProperty('l_light_rail')){
+
+            countJson['l_light_rail'] = length + countJson['l_light_rail'];
+          } else {
+            countJson['l_light_rail']=length;
+          }
+           
+        } 
+      }
+        catch(e) {}
+   }
     if (tags.hasOwnProperty('railway') && tags.railway === 'tram') {
       try{
      
         var length = turf.lineDistance(data.geojson(), 'kilometers');
-        if (countJson.hasOwnProperty('l_tram')){
-          countJson['l_tram'] = length + countJson['l_tram'];
-        } else {
-          countJson['l_tram']=length;
-        }
-      
-      } catch(e) {}
-      if (countJson.hasOwnProperty('tram')){
-        countJson['tram']++;
-      } else {
-        countJson['tram'] = 1;
-      }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('l_named_tram')){
+            countJson['l_named_tram'] = length + countJson['l_named_tram'];
+          } else {
+            countJson['l_named_tram']=length;
+          }
+          if (countJson.hasOwnProperty('named_tram')){
+            countJson['named_tram']++;
+          } else {
+            countJson['named_tram']=1;
+          } 
 
+         
+        } else {
+          if (countJson.hasOwnProperty('tram')){
+            countJson['tram']++;
+          } else {
+            countJson['tram'] = 1;
+          }
+         
+          if (countJson.hasOwnProperty('l_tram')){
+
+            countJson['l_tram'] = length + countJson['l_tram'];
+          } else {
+            countJson['l_tram']=length;
+          }
+           
+        } 
+      }
+        catch(e) {}
     }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'cycleway') {
+      try{
+     
+        var length = turf.lineDistance(data.geojson(), 'kilometers');
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('l_named_cycleway')){
+            countJson['l_named_cycleway'] = length + countJson['l_named_cycleway'];
+          } else {
+            countJson['l_named_cycleway']=length;
+          }
+          if (countJson.hasOwnProperty('named_cycleway')){
+            countJson['named_cycleway']++;
+          } else {
+            countJson['named_cycleway']=1;
+          } 
+
+         
+        } else {
+          if (countJson.hasOwnProperty('cycleway')){
+            countJson['cycleway']++;
+          } else {
+            countJson['cycleway'] = 1;
+          }
+         
+          if (countJson.hasOwnProperty('l_cycleway')){
+
+            countJson['l_cycleway'] = length + countJson['l_cycleway'];
+          } else {
+            countJson['l_cycleway']=length;
+          }
+           
+        } 
+      }
+        catch(e) {}
+   }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'footway') {
+      try{
+     
+        var length = turf.lineDistance(data.geojson(), 'kilometers');
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('l_named_footway')){
+            countJson['l_named_footway'] = length + countJson['l_named_footway'];
+          } else {
+            countJson['l_named_footway']=length;
+          }
+          if (countJson.hasOwnProperty('named_footway')){
+            countJson['named_footway']++;
+          } else {
+            countJson['named_footway']=1;
+          } 
+
+         
+        } else {
+          if (countJson.hasOwnProperty('footway')){
+            countJson['footway']++;
+          } else {
+            countJson['footway'] = 1;
+          }
+         
+          if (countJson.hasOwnProperty('l_footway')){
+
+            countJson['l_footway'] = length + countJson['l_footway'];
+          } else {
+            countJson['l_footway']=length;
+          }
+           
+        } 
+      }
+        catch(e) {}
+   }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'path') {
+      try{
+     
+        var length = turf.lineDistance(data.geojson(), 'kilometers');
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('l_named_path')){
+            countJson['l_named_path'] = length + countJson['l_named_path'];
+          } else {
+            countJson['l_named_path']=length;
+          }
+          if (countJson.hasOwnProperty('named_path')){
+            countJson['named_path']++;
+          } else {
+            countJson['named_path']=1;
+          } 
+
+         
+        } else {
+          if (countJson.hasOwnProperty('path')){
+            countJson['path']++;
+          } else {
+            countJson['path'] = 1;
+          }
+         
+          if (countJson.hasOwnProperty('l_path')){
+
+            countJson['l_path'] = length + countJson['l_path'];
+          } else {
+            countJson['l_path']=length;
+          }
+           
+        } 
+      }
+        catch(e) {}
+   }
     if (tags.hasOwnProperty('footway') && tags.footway === 'sidewalk') {
       try{
      
@@ -871,6 +1044,26 @@ if (argv.mode === 'basemap'){
             countJson['named_railway_halt']++;
           } else {
             countJson['named_railway_halt']=1;
+          }
+        } 
+      
+      } catch(e) {}
+      
+
+    }
+  if (tags.hasOwnProperty('leisure') && tags.leisure === 'park') {
+      try{
+     
+        if (countJson.hasOwnProperty('park')){
+          countJson['park'] ++;
+        } else {
+          countJson['park']=1;
+        }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('named_park')){
+            countJson['named_park']++;
+          } else {
+            countJson['named_park']=1;
           }
         } 
       
