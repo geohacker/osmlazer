@@ -730,7 +730,7 @@ if (argv.mode === 'basemap'){
       
 
     }
-    if (tags.hasOwnProperty('railway') && tags.highway === 'station' && data.type==='node') {
+    if (tags.hasOwnProperty('railway') && tags.highway === 'station') {
       try{
      
         if (countJson.hasOwnProperty('railway_station')){
