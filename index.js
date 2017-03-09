@@ -690,6 +690,86 @@ if (argv.mode === 'basemap'){
       }
 
     }
+    if (tags.hasOwnProperty('highway') && tags.highway === 'bus_stop' && data.type==='node') {
+      try{
+     
+        if (countJson.hasOwnProperty('bus_stop')){
+          countJson['bus_stop'] ++;
+        } else {
+          countJson['bus_stop']=1;
+        }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('named_bus_stop')){
+            countJson['named_bus_stop']++;
+          } else {
+            countJson['named_bus_stop']=1;
+          }
+        } 
+      
+      } catch(e) {}
+      
+
+    }
+    if (tags.hasOwnProperty('railway') && tags.highway === 'tram_stop' && data.type==='node') {
+      try{
+     
+        if (countJson.hasOwnProperty('tram_stop')){
+          countJson['tram_stop']++;
+        } else {
+          countJson['tram_stop']=1;
+        }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('named_tram_stop')){
+            countJson['named_tram_stop']++;
+          } else {
+            countJson['named_tram_stop']=1;
+          }
+        } 
+      
+      } catch(e) {}
+      
+
+    }
+    if (tags.hasOwnProperty('railway') && tags.highway === 'station' && data.type==='node') {
+      try{
+     
+        if (countJson.hasOwnProperty('railway_station')){
+          countJson['railway_station']++;
+        } else {
+          countJson['railway_station']=1;
+        }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('named_railway_station')){
+            countJson['named_railway_station']++;
+          } else {
+            countJson['named_railway_station']=1;
+          }
+        } 
+      
+      } catch(e) {}
+      
+
+    }
+    if (tags.hasOwnProperty('railway') && tags.highway === 'halt' && data.type==='node') {
+      try{
+     
+        if (countJson.hasOwnProperty('railway_halt')){
+          countJson['railway_halt']++;
+        } else {
+          countJson['railway_halt']=1;
+        }
+        if (tags.hasOwnProperty('name')){
+          if (countJson.hasOwnProperty('named_railway_halt')){
+            countJson['named_railway_halt']++;
+          } else {
+            countJson['named_railway_halt']=1;
+          }
+        } 
+      
+      } catch(e) {}
+      
+
+    }
 
   });
 } else if(argv.mode === 'density'){
