@@ -16,11 +16,15 @@ if (argv.filter && fs.existsSync(argv.filter)) {
 }
 
 var filter = ff(argv.filter);
+var nonProperties = ['lat', 'lon', 'coordinates', 'location'];
 
 stream.on('data', function (data) {
     var f;
     try {
         f = getFeature(data);
+        Object.keys(data).map(function (key) {
+            if (nonProperties.indexOf(key) === -1) f.properties[key] = data[key];
+        });
         if (f && filter(f)) {
             var fc = {
                 'type': 'FeatureCollection',
@@ -31,7 +35,6 @@ stream.on('data', function (data) {
     } catch (e) {
         return;
     }
-
 });
 
 stream.on('end', function() {
@@ -44,7 +47,5 @@ function getFeature(d) {
         'geometry': d.geojson(),
         'properties': d.tags()
     };
-
     return feature;
-
 }
